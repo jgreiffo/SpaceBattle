@@ -1,0 +1,15 @@
+body{
+    background-image: url("https://wallpapers.com/images/featured/4k-space-background-gx2rdfrem5bvjbqi.jpg");
+}
+#spaceLogo{
+    border: solid black;
+    display: flex;
+    background-color: gray;
+    justify-items: center;
+    max-width: 100%;
+    height: auto;
+    opacity: 0.5;
+    
+
+}
+
