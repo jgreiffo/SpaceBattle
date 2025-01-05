@@ -42,14 +42,6 @@ class SpaceShip {
 	}
 }
 
-function createAlienFleet(count) {
-	const fleet = [];
-	for (let i = 0; i < count; i++) {
-	  fleet.push(new AlienShip(i + 1));
-	}
-	return fleet;
-  }
-
   class Game {
 	constructor() {
 	  this.humanShip = new HumanShip("USS Assembly");
@@ -64,6 +56,24 @@ function createAlienFleet(count) {
 	  }
 	  return fleet;
 	}
+
+	checkWin() {
+		// Check if Human Ship is destroyed
+		if (this.humanShip.hull <= 0) {
+		  console.log(`${this.humanShip.name} went destroyed! The aliens have won!`);
+		  return true; // Game over
+		}
+	
+		// Check if all alien ships destroyed
+		const remainingAliens = this.alienFleet.filter(alien => alien.hull > 0);
+		if (remainingAliens.length === 0) {
+		  console.log(`All alien ships went annihilated! ${this.humanShip.name} has won!`);
+		  return true; // Game over
+		}
+	
+		// No winner yet
+		return false;
+	  }
   
 	start() {
 	  console.log("Welcome to the Space Battle Game!");
@@ -84,7 +94,10 @@ function createAlienFleet(count) {
 		  console.log("\nGame Over! The aliens have won.");
 		  return;
 		}
-  
+		
+		// Check win conditions
+		if (this.checkWin()) return;
+
 		// If the alien ship is destroyed, move to the next one
 		if (currentAlien.hull <= 0) {
 		  console.log(`${currentAlien.name} has been destroyed!`);
@@ -92,13 +105,13 @@ function createAlienFleet(count) {
 		}
   
 		// Allow the player to retreat if more aliens remain
-		// if (this.currentAlienIndex < this.alienFleet.length) {
-		//   const retreat = prompt("Do you want to retreat? (yes/no)").toLowerCase();
-		//   if (retreat === "yes") {
-		// 	console.log(`${this.humanShip.name} retreats. Game over.`);
-		// 	return;
-		//   }
-		// }
+		if (this.currentAlienIndex < this.alienFleet.length) {
+		  const retreat = prompt("Do you want to retreat? (yes/no)").toLowerCase();
+		  if (retreat === "yes") {
+			console.log(`${this.humanShip.name} retreats. Game over.`);
+			return;
+		  }
+		}
 	  }
   
 	  // If all alien ships are destroyed, the human wins
@@ -107,6 +120,7 @@ function createAlienFleet(count) {
 	  }
 	}
   
+	
 	battle(alienShip) {
 	  while (this.humanShip.hull > 0 && alienShip.hull > 0) {
 		this.humanShip.attackTarget(alienShip); // Human ship attacks
@@ -117,7 +131,7 @@ function createAlienFleet(count) {
 	}
   }
   
-  // Start the game
+  // and again Start the game
   const spaceBattleGame = new Game();
   spaceBattleGame.start();  
 
