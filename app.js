@@ -31,13 +31,48 @@ function createAlienFleet(count) {
 	return fleet;
   }
 
-  // instances
-  const humanShip = new HumanShip("USS Assembly");
-  const alienFleet = createAlienFleet(6);
+//   // instances
+//   const humanShip = new HumanShip("USS Assembly");
+//   const alienFleet = createAlienFleet(6);
   
-  console.log("\nHuman Ship:", humanShip);
-  console.log("\nAlien Fleet:");
-  alienFleet.forEach((ship) => console.log(ship));
+//   console.log("\nHuman Ship:", humanShip);
+//   console.log("\nAlien Fleet:");
+//   alienFleet.forEach((ship) => console.log(ship));
+
+// Simulate a one-on-one battle between humanShip and a single alien ship
+function simulateBattle(humanShip, alienShip) {
+	console.log(`\nBattle begins between ${humanShip.name} and ${alienShip.name}!`);
+	
+	while (humanShip.hull > 0 && alienShip.hull > 0) {
+	  // Human ship attacks first
+	  humanShip.attack(alienShip);
+	  if (alienShip.hull <= 0) {
+		console.log(`${alienShip.name} has been destroyed! ${humanShip.name} wins!`);
+		break;
+	  }
+  
+	  // Alien ship counterattacks
+	  alienShip.attack(humanShip);
+	  if (humanShip.hull <= 0) {
+		console.log(`${humanShip.name} has been destroyed! ${alienShip.name} wins!`);
+		break;
+	  }
+	}
+  }
+  
+  // Instantiate Human Ship and a single Alien Ship
+  const humanShip = new HumanShip("USS Hero");
+  const alienShip = new AlienShip(1);
+  
+  // Display initial stats
+  console.log("\nHuman Ship Stats:", humanShip);
+  console.log("Alien Ship Stats:", alienShip);
+  
+  // Simulate the battle
+  simulateBattle(humanShip, alienShip);
+
+
+  
 
 // // les's begin!
 // // REMEMBER BIND YOUR METHODS IF YOU PLAN TO USE THEM AS EVENT Listeners !!!!!!!
