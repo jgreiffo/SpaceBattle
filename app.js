@@ -50,16 +50,89 @@ function createAlienFleet(count) {
 	return fleet;
   }
 
+  class Game {
+	constructor() {
+	  this.humanShip = new HumanShip("USS Assembly");
+	  this.alienFleet = this.createAlienFleet(5);
+	  this.currentAlienIndex = 0;
+	}
+  
+	createAlienFleet(count) {
+	  const fleet = [];
+	  for (let i = 0; i < count; i++) {
+		fleet.push(new AlienShip(i + 1));
+	  }
+	  return fleet;
+	}
+  
+	start() {
+	  console.log("Welcome to the Space Battle Game!");
+	  console.log("\nYour ship:", this.humanShip);
+	  console.log("Alien Fleet:");
+	  this.alienFleet.forEach((alienShip) => console.log(alienShip));
+  
+	  console.log("\nThe battle begins!");
+	  while (this.humanShip.hull > 0 && this.currentAlienIndex < this.alienFleet.length) {
+		const currentAlien = this.alienFleet[this.currentAlienIndex];
+		console.log(`\n${this.humanShip.name} is facing ${currentAlien.name}`);
+  
+		// Start a battle with the current alien
+		this.battle(currentAlien);
+  
+		// If the human ship is destroyed, end the game
+		if (this.humanShip.hull <= 0) {
+		  console.log("\nGame Over! The aliens have won.");
+		  return;
+		}
+  
+		// If the alien ship is destroyed, move to the next one
+		if (currentAlien.hull <= 0) {
+		  console.log(`${currentAlien.name} has been destroyed!`);
+		  this.currentAlienIndex++;
+		}
+  
+		// Allow the player to retreat if more aliens remain
+		if (this.currentAlienIndex < this.alienFleet.length) {
+		  const retreat = prompt("Do you want to retreat? (yes/no)").toLowerCase();
+		  if (retreat === "yes") {
+			console.log(`${this.humanShip.name} retreats. Game over.`);
+			return;
+		  }
+		}
+	  }
+  
+	  // If all alien ships are destroyed, the human wins
+	  if (this.humanShip.hull > 0) {
+		console.log("\nCongratulations! You defeated all the alien ships!");
+	  }
+	}
+  
+	battle(alienShip) {
+	  while (this.humanShip.hull > 0 && alienShip.hull > 0) {
+		this.humanShip.attackTarget(alienShip); // Human ship attacks
+		if (alienShip.hull > 0) {
+		  alienShip.attack(this.humanShip); // Alien ship counterattacks
+		}
+	  }
+	}
+  }
+  
+  // Start the game
+  const spaceBattleGame = new Game();
+  spaceBattleGame.start();  
+
 // Instance USS Assembly and a *single* Alien Ship
-const humanShip = new HumanShip("USS Assembly");
-const alienShip = new AlienShip(1);
+// const humanShip = new HumanShip("USS Assembly");
+// const alienShip = new AlienShip(1);
 
-// Display initial stats
-console.log("\nHuman Ship Stats:", humanShip);
-console.log("Alien Ship Stats:", alienShip);
+// // Display initial stats
+// console.log("\nHuman Ship Stats:", humanShip);
+// console.log("Alien Ship Stats:", alienShip);
 
-// Attack the target
-humanShip.attackTarget(alienShip);
+// // Attack the target
+// humanShip.attackTarget(alienShip);
+
+
 
 //   // instances
 //   const humanShip = new HumanShip("USS Assembly");
