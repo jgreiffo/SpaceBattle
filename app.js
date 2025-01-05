@@ -5,15 +5,34 @@ class SpaceShip {
 	  this.hull = hull;
 	  this.accuracy = accuracy; 
 	}
-}
-  
+
+	attack(target) {
+		console.log(`${this.name} attacks ${target.name}!`);
+		if (Math.random() < this.accuracy) {
+		  console.log(`Hit! ${target.name} takes ${this.firepower} damage.`);
+		  target.hull -= this.firepower;
+		  if (target.hull <= 0) {
+			console.log(`${target.name} has been destroyed!`);
+		  }
+		} else {
+		  console.log(`${this.name} missed the attack.`);
+		}
+	  }
+	}
+
+// Subclass  HUMAN SHIP
   class HumanShip extends SpaceShip {
 	constructor(name) {
 	  super(name, 20, 5, 0.7);
 	}
-  
+	
+	attackTarget(target) {
+		console.log(`${this.name} is preparing to attack ${target.name}.`);
+		this.attack(target);
+	  }
   }
   
+  // Subclass  ALIEN SHIP
   class AlienShip extends SpaceShip {
 	constructor(id) {
 	  const hull = Math.floor(Math.random() * (6 - 3 + 1)) + 3; 
@@ -31,6 +50,17 @@ function createAlienFleet(count) {
 	return fleet;
   }
 
+// Instance USS Assembly and a *single* Alien Ship
+const humanShip = new HumanShip("USS Assembly");
+const alienShip = new AlienShip(1);
+
+// Display initial stats
+console.log("\nHuman Ship Stats:", humanShip);
+console.log("Alien Ship Stats:", alienShip);
+
+// Attack the target
+humanShip.attackTarget(alienShip);
+
 //   // instances
 //   const humanShip = new HumanShip("USS Assembly");
 //   const alienFleet = createAlienFleet(6);
@@ -39,40 +69,7 @@ function createAlienFleet(count) {
 //   console.log("\nAlien Fleet:");
 //   alienFleet.forEach((ship) => console.log(ship));
 
-// Simulate a one-on-one battle between humanShip and a single alien ship
-function simulateBattle(humanShip, alienShip) {
-	console.log(`\nBattle begins between ${humanShip.name} and ${alienShip.name}!`);
-	
-	while (humanShip.hull > 0 && alienShip.hull > 0) {
-	  // Human ship attacks first
-	  humanShip.attack(alienShip);
-	  if (alienShip.hull <= 0) {
-		console.log(`${alienShip.name} has been destroyed! ${humanShip.name} wins!`);
-		break;
-	  }
-  
-	  // Alien ship counterattacks
-	  alienShip.attack(humanShip);
-	  if (humanShip.hull <= 0) {
-		console.log(`${humanShip.name} has been destroyed! ${alienShip.name} wins!`);
-		break;
-	  }
-	}
-  }
-  
-  // Instantiate Human Ship and a single Alien Ship
-  const humanShip = new HumanShip("USS Hero");
-  const alienShip = new AlienShip(1);
-  
-  // Display initial stats
-  console.log("\nHuman Ship Stats:", humanShip);
-  console.log("Alien Ship Stats:", alienShip);
-  
-  // Simulate the battle
-  simulateBattle(humanShip, alienShip);
 
-
-  
 
 // // les's begin!
 // // REMEMBER BIND YOUR METHODS IF YOU PLAN TO USE THEM AS EVENT Listeners !!!!!!!
