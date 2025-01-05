@@ -5,20 +5,7 @@ class SpaceShip {
 	  this.hull = hull;
 	  this.accuracy = accuracy; 
 	}
-
-	attack(target) {
-		console.log(`${this.name} attacks ${target.name}!`);
-		if (Math.random() < this.accuracy) {
-		  console.log(`Hit! ${target.name} takes ${this.firepower} damage.`);
-		  target.hull -= this.firepower;
-		  if (target.hull <= 0) {
-			console.log(`${target.name} has been destroyed!`);
-		  }
-		} else {
-		  console.log(`${this.name} missed the attack.`);
-		}
-	  }
-	}
+}
 
 // Subclass  HUMAN SHIP
   class HumanShip extends SpaceShip {
@@ -27,10 +14,23 @@ class SpaceShip {
 	}
 	
 	attackTarget(target) {
-		console.log(`${this.name} is preparing to attack ${target.name}.`);
-		this.attack(target);
+		console.log(`${this.name} is attacking ${target.name}!`);
+	
+		if (Math.random() < this.accuracy) {
+		  console.log(`Direct hit! ${target.name} takes ${this.firepower} damage.`);
+		  target.hull -= this.firepower;
+	
+		  if (target.hull <= 0) {
+			console.log(`${target.name} has been destroyed!`);
+		  } else {
+			console.log(`${target.name}'s remaining hull: ${target.hull}`);
+		  }
+		} else {
+		  console.log(`${this.name} missed the attack!`);
+		}
 	  }
-  }
+	}
+	
   
   // Subclass  ALIEN SHIP
   class AlienShip extends SpaceShip {
