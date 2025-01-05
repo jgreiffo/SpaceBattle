@@ -76,7 +76,7 @@ function createAlienFleet(count) {
 		const currentAlien = this.alienFleet[this.currentAlienIndex];
 		console.log(`\n${this.humanShip.name} is facing ${currentAlien.name}`);
   
-		// Start a battle with the current alien
+		// battle the current alien
 		this.battle(currentAlien);
   
 		// If the human ship is destroyed, end the game
@@ -92,13 +92,13 @@ function createAlienFleet(count) {
 		}
   
 		// Allow the player to retreat if more aliens remain
-		if (this.currentAlienIndex < this.alienFleet.length) {
-		  const retreat = prompt("Do you want to retreat? (yes/no)").toLowerCase();
-		  if (retreat === "yes") {
-			console.log(`${this.humanShip.name} retreats. Game over.`);
-			return;
-		  }
-		}
+		// if (this.currentAlienIndex < this.alienFleet.length) {
+		//   const retreat = prompt("Do you want to retreat? (yes/no)").toLowerCase();
+		//   if (retreat === "yes") {
+		// 	console.log(`${this.humanShip.name} retreats. Game over.`);
+		// 	return;
+		//   }
+		// }
 	  }
   
 	  // If all alien ships are destroyed, the human wins
@@ -120,6 +120,23 @@ function createAlienFleet(count) {
   // Start the game
   const spaceBattleGame = new Game();
   spaceBattleGame.start();  
+
+//   // Instantiate USS Assembly and a single Alien Ship
+// const humanShip = new HumanShip("USS Assembly");
+// const alienShip = new AlienShip(1);
+
+// // Display initial stats
+// console.log("\nHuman Ship Stats:", humanShip);
+// console.log("Alien Ship Stats:", alienShip);
+
+// // Call the attackTarget method and pass the alien ship
+// humanShip.attackTarget(alienShip);
+
+// // Display updated stats
+// console.log("\nUpdated Stats After Attack:");
+// console.log("Human Ship Stats:", humanShip);
+// console.log("Alien Ship Stats:", alienShip);
+
 
 // Instance USS Assembly and a *single* Alien Ship
 // const humanShip = new HumanShip("USS Assembly");
