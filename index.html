@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Space Battle Game - USS Assembly</title>
+    <title>Space Battle Game</title>
     <!-- space logo url https://cdn1.epicgames.com/spt-assets/4248fe5a4bf04f4a971391171c36c35c/spacebattle-logo-g29sx.png?resize=1&w=480&h=270&quality=medium -->
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,18 +15,43 @@
       <!-- Space Battle Logo -->
       <div>
         <img src ="https://cdn1.epicgames.com/spt-assets/4248fe5a4bf04f4a971391171c36c35c/spacebattle-logo-g29sx.png?resize=1&w=480&h=270&quality=medium") 
-        alt="Logo Space Battle"><id>spaceLogo</id>
+        alt="Logo Space Battle" id="spaceLogo">
       </div>
-
-      <!-- Dark Ambience Loop Sound Space Battle -->
-      <!-- <audio controls loop>
-        <source src="/Users/jennygreiff/Desktop/Dev/perscholas/rtt_55/Homework/SpaceBattle/Iwan Gabovitch - DarkAmbienceLoop.ogg" type="audio/ogg">
-        <source src="/Users/jennygreiff/Desktop/Dev/perscholas/rtt_55/Homework/SpaceBattle/Iwan Gabovitch - DarkAmbienceLoop.mp3" type="audio/mp3">
-        Your browser does not support the audio element.
-      </audio> -->
-      
     </header>
-        
+    <div id="game-container">
+      <h1 id="game-title">Space Battle Game</h1>
+  
+      <div id="status">
+        <div id="human-status">
+          <img src="https://cdn.pixabay.com/animation/2022/07/31/06/27/06-27-17-124_512.gif" alt="Human Ship" class="ship-image">
+          <h3>USS Assembly</h3>
+          <p>Hull: <span id="human-hull">20</span></p>
+        </div>
+        <div id="alien-status">
+          <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExMXFoaGtra3Fvbjgwa3Jtb2ZnZXBibjk5ejQydGxuMnh1a3o1ZGt2dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/d7nUMsadSuoX0oWFZI/giphy.webp" alt="Alien Ship" class="ship-image">
+          <h3>Alien Fleet</h3>
+          <p>Remaining Ships: <span id="alien-count">6</span></p>
+        </div>
+      </div>
+  
+      <div id="console-output">
+        <!-- Game messages will appear here -->
+      </div>
+  
+      <div id="controls">
+        <button id="attack-btn">Attack</button>
+        <button id="retreat-btn">Retreat</button>
+      </div>
+    </body> 
+<footer>  
+<!-- Dark Ambience Loop Sound Space Battle -->
+      <audio controls loop>
+        <source src="Iwan Gabovitch - DarkAmbienceLoop.ogg" type="audio/ogg">
+        <source src="Iwan Gabovitch - DarkAmbienceLoop.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+      </audio>
+    </footer>
+          
     <script src="app.js" async defer></script>
   </body>
 </html>
