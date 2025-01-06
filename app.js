@@ -115,7 +115,15 @@ class Game {
 	  }
 	}
   }
-
+  document.getElementById('attack-btn').addEventListener('click', () => {
+	game.humanAttack();
+  });
+  
+  document.getElementById('retreat-btn').addEventListener('click', () => {
+	console.log('Retreating from battle!');
+	alert('Game Over! You retreated.');
+  });
+  
   
   // Instantiate and start the game
   const spaceBattleGame = new Game();
